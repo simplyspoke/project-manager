@@ -1,0 +1,11 @@
+# Development Files
+jest.config.js
+tsconfig.json
+tslint.json
+.travis.yml
+.wallaby.js
+.prettierrc
+.editorconfig
+
+# source code
+src*
