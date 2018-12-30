@@ -1,0 +1,54 @@
+{
+    "name": "Example",
+    "height": 1011,
+    "synchronizedInput": false,
+    "type": "Session",
+    "version": "1.0",
+    "width": 700,
+    "child": {
+        "child1": {
+            "directory": "\/home\/{user}\/projects\/{client}\/{project}",
+            "height": 511,
+            "profile": "db3e98a0-0c7a-4888-a4db-a2fae1b0cfe0",
+            "readOnly": false,
+            "synchronizedInput": true,
+            "title": "Server",
+            "type": "Terminal",
+            "uuid": "50554962-7cdf-4f18-be39-1d80d768c80f",
+            "overrideCommand": "/bin/bash -c 'npm start; /bin/bash'",
+            "width": 700
+        },
+        "child2": {
+            "child1": {
+                "directory": "\/home\/{user}\/projects\/{client}\/{project}",
+                "height": 500,
+                "profile": "db3e98a0-0c7a-4888-a4db-a2fae1b0cfe0",
+                "readOnly": false,
+            	  "title": "Commands",
+                "synchronizedInput": true,
+                "type": "Terminal",
+                "uuid": "50554962-7cdf-4f18-be39-1d80d768c80f",
+                "width": 350
+            },
+            "child2": {
+            	"directory": "\/home\/{user}\/projects\/{client}\/{project}",
+                "height": 500,
+                "profile": "db3e98a0-0c7a-4888-a4db-a2fae1b0cfe0",
+                "readOnly": false,
+            	  "title": "Tools",
+                "synchronizedInput": true,
+                "type": "Terminal",
+                "uuid": "50554962-7cdf-4f18-be39-1d80d768c80f",
+                "width": 350
+            },
+            "orientation": 0,
+            "position": 24,
+            "ratio": 0.496332518337408324,
+            "type": "Paned"
+        },
+        "orientation": 1,
+        "position": 49,
+        "ratio": 0.5,
+        "type": "Paned"
+    }
+}

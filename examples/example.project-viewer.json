@@ -1,0 +1,92 @@
+{
+  "info": {
+    "version": "1.0.15",
+    "updated": "2018-12-29T22:39:19.476Z"
+  },
+  "root": [
+    {
+      "type": "group",
+      "name": "{client}",
+      "sortBy": "position",
+      "icon": "icon-person",
+      "color": "",
+      "expanded": true,
+      "list": [
+        {
+          "type": "project",
+          "name": "{project}",
+          "icon": "icon-globe",
+          "color": "#2ba84a",
+          "devMode": false,
+          "config": {},
+          "paths": [
+            "/home/{user}/projects/{client}/{project}"
+          ]
+        },
+        {
+          "type": "project",
+          "name": "{project}",
+          "icon": "devicons-nodejs_small",
+          "color": "",
+          "devMode": false,
+          "config": {},
+          "paths": [
+            "/home/{user}/projects/{client}/{project}"
+          ]
+        },
+        {
+          "type": "group",
+          "name": "Archive",
+          "sortBy": "alphabetically",
+          "icon": "icon-fold",
+          "color": "",
+          "expanded": false,
+          "list": [
+            {
+              "type": "group",
+              "name": "{client}",
+              "sortBy": "alphabetically",
+              "icon": "icon-link",
+              "color": "#edb88b",
+              "expanded": false,
+              "list": [
+                {
+                  "type": "project",
+                  "name": "{project}",
+                  "icon": "icon-briefcase",
+                  "color": "#d8dad3",
+                  "devMode": false,
+                  "config": {},
+                  "paths": [
+                    "/home/{user}/projects/{client}/{project}"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "{client}",
+      "sortBy": "position",
+      "icon": "icon-broadcast",
+      "color": "#f5bb00",
+      "expanded": true,
+      "list": [
+        {
+          "type": "project",
+          "name": "{project}",
+          "icon": "devicons-prolog",
+          "color": "#ffdb80",
+          "devMode": false,
+          "config": {},
+          "paths": [
+            "/home/{user}/projects/{client}/{project}"
+          ]
+        }
+      ]
+    }
+  ]
+}

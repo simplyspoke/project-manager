@@ -2,11 +2,16 @@
   "name": "project-manager",
   "version": "0.0.1",
   "description": "A collection of node tools design and organized to facilitate the process of managing and working multiple consuting projects.",
-  "main": "dist",
+  "bin": {
+    "example-multi-ts": "./bin/run"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "start": "ts-node ./src",
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "commit": "git-cz",
@@ -46,6 +51,9 @@
   },
   "homepage": "https://github.com/simplyspoke/project-manager#readme",
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/figlet": "^1.2.0",
+    "@types/inquirer": "0.0.43",
     "@types/jest": "^23.3.10",
     "cz-conventional-changelog": "^2.1.0",
     "dotenv": "^6.2.0",
@@ -62,5 +70,11 @@
     "typedoc": "^0.13.0",
     "typescript": "^3.2.2",
     "validate-commit-msg": "^2.14.0"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "figlet": "^1.2.1",
+    "inquirer": "^6.2.1"
   }
 }
