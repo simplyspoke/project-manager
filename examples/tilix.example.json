@@ -9,12 +9,12 @@
         "child1": {
             "directory": "\/home\/{user}\/projects\/{client}\/{project}",
             "height": 511,
-            "profile": "db3e98a0-0c7a-4888-a4db-a2fae1b0cfe0",
+            "profile": "",
             "readOnly": false,
             "synchronizedInput": true,
             "title": "Server",
             "type": "Terminal",
-            "uuid": "50554962-7cdf-4f18-be39-1d80d768c80f",
+            "uuid": "",
             "overrideCommand": "/bin/bash -c 'npm start; /bin/bash'",
             "width": 700
         },
@@ -22,23 +22,23 @@
             "child1": {
                 "directory": "\/home\/{user}\/projects\/{client}\/{project}",
                 "height": 500,
-                "profile": "db3e98a0-0c7a-4888-a4db-a2fae1b0cfe0",
+                "profile": "",
                 "readOnly": false,
             	  "title": "Commands",
                 "synchronizedInput": true,
                 "type": "Terminal",
-                "uuid": "50554962-7cdf-4f18-be39-1d80d768c80f",
+                "uuid": "",
                 "width": 350
             },
             "child2": {
             	"directory": "\/home\/{user}\/projects\/{client}\/{project}",
                 "height": 500,
-                "profile": "db3e98a0-0c7a-4888-a4db-a2fae1b0cfe0",
+                "profile": "",
                 "readOnly": false,
             	  "title": "Tools",
                 "synchronizedInput": true,
                 "type": "Terminal",
-                "uuid": "50554962-7cdf-4f18-be39-1d80d768c80f",
+                "uuid": "",
                 "width": 350
             },
             "orientation": 0,

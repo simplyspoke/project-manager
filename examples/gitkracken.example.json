@@ -1,0 +1,29 @@
+{
+  "editor": {
+    "fontFamily": "Ubuntu Mono"
+  },
+  "userEmail": "{user.email}",
+  "userName": "{user.name}",
+  "profileIcon": "Just-Plain-Ol-Keif.png",
+  "profileName": "{profile.name}",
+  "lastOpenedRepository": "/home/{user}/projects/{client}/{project}/.git",
+  "projectGroupNamesByDirectory": {
+    "/home/{user}/projects/{client}": "{client}"
+  },
+  "favoriteRepositories": [
+    "/home/{user}/projects/{client}/{project}/.git",
+  ],
+  "layout": {
+    "RefPanel": {
+      "width": 215
+    },
+    "DetailPanel": {
+      "width": 400
+    }
+  },
+  "services": {
+    "github": {
+      "ssh": {}
+    }
+  }
+}
