@@ -1,29 +1,43 @@
 import chalk from 'chalk';
 import * as fs from 'fs-extra';
 
+export interface Client {
+  name: string;
+  path: string;
+  projects?: {
+    [projectName: string]: any;
+  };
+}
+
 export class ClientAggregator {
-    options = {};
-    store: {
-        [key: string]: any;
-    };
+  options = {};
+  projectsPath: string;
+  store: {
+    [key: string]: any;
+  };
 
-    constructor(store: object) {
-        this.store = store;
-    }
+  constructor(projectsPath: string, store: object) {
+    this.projectsPath = projectsPath;
+    this.store = store;
+  }
 
-    public async run() {
-        let list = await fs.readdir('../../');
+  public async run() {
+    console.info(process.env.HOME);
+    let pathContents = await fs.readdir(this.projectsPath);
 
-        list = list.filter(item => {
-            const stats = fs.lstatSync(`../../${item}`);
+    this.store.clients = pathContents
+      .filter(item => {
+        const stats = fs.lstatSync(`${this.projectsPath}/${item}`);
 
-            console.log('item', stats.isDirectory());
-
-            return stats.isDirectory();
-        });
-
-        this.store.clients = list;
-
-        console.log(list);
-    }
+        return stats.isDirectory();
+      })
+      .map(
+        (item): Client => {
+          return {
+            name: item,
+            path: `${this.projectsPath}/${item}`,
+          };
+        }
+      );
+  }
 }

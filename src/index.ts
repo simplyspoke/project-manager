@@ -8,60 +8,64 @@ import { ClientAggregator, ProjectAggregator } from './aggregators';
 import { MainGenerator } from './generators';
 
 const store = {};
+const projectsPath = `${process.env.HOME}/projects`;
 
 const aggregators = {
-    client: new ClientAggregator(store),
-    project: new ProjectAggregator(store),
+  client: new ClientAggregator(projectsPath, store),
+  project: new ProjectAggregator(projectsPath, store),
 };
 
 const generators = {
-    main: new MainGenerator(store),
+  main: new MainGenerator(projectsPath, store),
 };
 const init = () => {
-    console.log(
-        chalk.green(
-            figlet.textSync('Project Manager', {
-                horizontalLayout: 'default',
-                verticalLayout: 'default',
-            })
-        )
-    );
+  // Clear the screen and reset the cursor
+  process.stdout.write('\x1B[2J\x1B[0f');
+  console.log(
+    chalk.green(
+      figlet.textSync('Project Manager', {
+        horizontalLayout: 'default',
+        verticalLayout: 'default',
+      })
+    )
+  );
 };
 
 const askQuestions = () => {
-    const questions = [
+  const questions = [
+    {
+      type: 'list',
+      name: 'question',
+      message: 'What would you like to do?',
+      choices: [
         {
-            type: 'list',
-            name: 'question',
-            message: 'What would you like to do?',
-            choices: [
-                {
-                    name: 'Run Aggregators',
-                    value: 'aggregate',
-                },
-                {
-                    name: 'Exit',
-                    value: 'exit',
-                },
-            ],
+          name: 'Run Aggregators',
+          value: 'aggregate',
         },
-    ];
-    return inquirer.prompt(questions);
+        {
+          name: 'Exit',
+          value: 'exit',
+        },
+      ],
+    },
+  ];
+  return inquirer.prompt(questions);
 };
 
 const run = async () => {
-    // show script introduction
-    init();
+  // show script introduction
+  init();
 
-    // ask questions
-    const answers: { [k: string]: any } = await askQuestions();
+  // ask questions
+  const answers: { [k: string]: any } = await askQuestions();
 
-    if (answers.question === 'aggregate') {
-        await aggregators.client.run();
-        await generators.main.run();
-    }
+  if (answers.question === 'aggregate') {
+    await aggregators.client.run();
+    await aggregators.project.run();
+    await generators.main.run();
+  }
 
-    console.log('Exiting!');
+  console.log('Exiting!');
 };
 
 run();
