@@ -3,6 +3,13 @@ import * as fs from 'fs-extra';
 
 export class ClientAggregator {
     options = {};
+    store: {
+        [key: string]: any;
+    };
+
+    constructor(store: object) {
+        this.store = store;
+    }
 
     public async run() {
         let list = await fs.readdir('../../');
@@ -14,6 +21,8 @@ export class ClientAggregator {
 
             return stats.isDirectory();
         });
+
+        this.store.clients = list;
 
         console.log(list);
     }

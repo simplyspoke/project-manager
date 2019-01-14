@@ -5,12 +5,18 @@ import * as figlet from 'figlet';
 import * as inquirer from 'inquirer';
 
 import { ClientAggregator, ProjectAggregator } from './aggregators';
+import { MainGenerator } from './generators';
+
+const store = {};
 
 const aggregators = {
-    client: new ClientAggregator(),
-    project: new ProjectAggregator(),
+    client: new ClientAggregator(store),
+    project: new ProjectAggregator(store),
 };
 
+const generators = {
+    main: new MainGenerator(store),
+};
 const init = () => {
     console.log(
         chalk.green(
@@ -52,6 +58,7 @@ const run = async () => {
 
     if (answers.question === 'aggregate') {
         await aggregators.client.run();
+        await generators.main.run();
     }
 
     console.log('Exiting!');
