@@ -39,8 +39,8 @@ const askQuestions = () => {
       message: 'What would you like to do?',
       choices: [
         {
-          name: 'Run Aggregators',
-          value: 'aggregate',
+          name: 'Generate Config',
+          value: 'generate',
         },
         {
           name: 'Exit',
@@ -54,18 +54,38 @@ const askQuestions = () => {
 
 const run = async () => {
   // show script introduction
+  let running = true;
+
   init();
-
-  // ask questions
-  const answers: { [k: string]: any } = await askQuestions();
-
-  if (answers.question === 'aggregate') {
-    await aggregators.client.run();
-    await aggregators.project.run();
-    await generators.main.run();
+  while (running) {
+    running = await ask();
   }
 
-  console.log('Exiting!');
+  console.log('Exiting...');
+};
+
+const ask = async (): Promise<boolean> => {
+  // used to determine if the tool should keep running.
+  let running = true;
+  try {
+    // ask questions
+    const answers: { [k: string]: any } = await askQuestions();
+
+    switch (answers.question) {
+      case 'generate':
+        await aggregators.client.run();
+        await aggregators.project.run();
+        await generators.main.run();
+        break;
+      case 'exit':
+        running = false;
+    }
+  } catch (error) {
+    console.error(error);
+    running = false;
+  } finally {
+    return running;
+  }
 };
 
 run();

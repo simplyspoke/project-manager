@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import * as fs from 'fs-extra';
+const ini = require('ini');
 
 export interface Project {
   name: string;
@@ -31,11 +32,20 @@ export class ProjectAggregator {
           })
           .map(
             (item): Project => {
-              return {
+              const gitPath = `${client.path}/${item}/.git/config`;
+
+              const project = {
                 name: item,
                 path: `${this.projectsPath}/${item}`,
-                repository: '',
+                repository: 'NONE',
               };
+
+              if (fs.existsSync(`${client.path}/${item}/.git/config`)) {
+                const gitConfig = ini.parse(fs.readFileSync(gitPath, 'utf-8'));
+                project.repository = gitConfig;
+              }
+
+              return project;
             }
           );
 
