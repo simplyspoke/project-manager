@@ -2,7 +2,9 @@ import chalk from 'chalk';
 import * as fs from 'fs-extra';
 
 export class MainGenerator {
-  projectsPath: string;
+  config = {
+    path: `${process.env.HOME}/.projects`,
+  };
   options: fs.WriteOptions = {
     spaces: 2,
   };
@@ -10,21 +12,24 @@ export class MainGenerator {
     [key: string]: any;
   };
 
-  constructor(projectsPath: string, store: object) {
-    this.projectsPath = projectsPath;
+  constructor(store: object) {
     this.store = store;
+
+    if (process.env.NODE_ENV === 'development') {
+      this.config.path = '.';
+    }
   }
 
   public async run() {
     const data = this.store;
 
-    await fs.ensureDir(`${process.env.HOME}/.projects`).catch(err => {
+    await fs.ensureDir(`${this.config.path}/.projects`).catch(err => {
       console.error('Could not creat directory:', err);
     });
 
     await fs
       .writeJson(
-        `${process.env.HOME}/.projects/projects.json`,
+        `${this.config.path}/.projects/projects.json`,
         data,
         this.options
       )

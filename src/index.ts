@@ -16,7 +16,7 @@ const aggregators = {
 };
 
 const generators = {
-  main: new MainGenerator(projectsPath, store),
+  main: new MainGenerator(store),
 };
 const init = () => {
   // Clear the screen and reset the cursor
