@@ -28,11 +28,7 @@ export class MainGenerator {
     });
 
     await fs
-      .writeJson(
-        `${this.config.path}/.projects/projects.json`,
-        data,
-        this.options
-      )
+      .writeJson(`${this.config.path}/projects.json`, data, this.options)
       .catch(err => {
         console.error(err);
       });
