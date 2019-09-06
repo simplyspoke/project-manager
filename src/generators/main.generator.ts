@@ -16,14 +16,14 @@ export class MainGenerator {
     this.store = store;
 
     if (process.env.NODE_ENV === 'development') {
-      this.config.path = '.';
+      this.config.path = './.projects';
     }
   }
 
   public async run() {
     const data = this.store;
 
-    await fs.ensureDir(`${this.config.path}/.projects`).catch(err => {
+    await fs.ensureDir(`${this.config.path}`).catch(err => {
       console.error('Could not creat directory:', err);
     });
 

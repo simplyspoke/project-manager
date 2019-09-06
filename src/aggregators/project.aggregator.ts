@@ -2,19 +2,19 @@ import chalk from 'chalk';
 import * as fs from 'fs-extra';
 const ini = require('ini');
 
+import { Store } from './../index';
+
 export interface Project {
   name: string;
   path: string;
-  repository: string;
+  repository: any;
 }
 
 export class ProjectAggregator {
   projectsPath: string;
-  store: {
-    [key: string]: any;
-  };
+  store: Store;
 
-  constructor(projectsPath: string, store: object) {
+  constructor(projectsPath: string, store: Store) {
     this.projectsPath = projectsPath;
     this.store = store;
   }
@@ -36,7 +36,7 @@ export class ProjectAggregator {
 
               const project = {
                 name: item,
-                path: `${this.projectsPath}/${item}`,
+                path: `${this.projectsPath}/${client.name}/${item}`,
                 repository: 'NONE',
               };
 

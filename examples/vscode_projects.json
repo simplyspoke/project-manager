@@ -1,0 +1,21 @@
+{
+  "groups": [
+    {
+      "name": "Group",
+      "projects": [
+        {
+          "name": "Nested Project",
+          "description": "An awesome nested project",
+          "path": "/path/to/nested/project"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project",
+      "description": "An awesome project",
+      "path": "/path/to/project"
+    }
+  ]
+}

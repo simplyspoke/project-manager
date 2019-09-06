@@ -4,10 +4,14 @@ import chalk from 'chalk';
 import * as figlet from 'figlet';
 import * as inquirer from 'inquirer';
 
-import { ClientAggregator, ProjectAggregator } from './aggregators';
-import { MainGenerator } from './generators';
+import { Client, ClientAggregator, ProjectAggregator } from './aggregators';
+import { MainGenerator, VSCodeGenerator } from './generators';
 
-const store = {};
+export interface Store {
+  clients: Client[];
+}
+
+const store: Store = { clients: [] };
 const projectsPath = `${process.env.HOME}/projects`;
 
 const aggregators = {
@@ -17,6 +21,7 @@ const aggregators = {
 
 const generators = {
   main: new MainGenerator(store),
+  vscode: new VSCodeGenerator(store),
 };
 const init = () => {
   // Clear the screen and reset the cursor
@@ -31,7 +36,7 @@ const init = () => {
   );
 };
 
-const askQuestions = () => {
+const askQuestions = (): Promise<{ [k: string]: any }> => {
   const questions = [
     {
       type: 'list',
@@ -69,13 +74,14 @@ const ask = async (): Promise<boolean> => {
   let running = true;
   try {
     // ask questions
-    const answers: { [k: string]: any } = await askQuestions();
+    const answers = await askQuestions();
 
     switch (answers.question) {
       case 'generate':
         await aggregators.client.run();
         await aggregators.project.run();
         await generators.main.run();
+        await generators.vscode.run();
         break;
       case 'exit':
         running = false;
@@ -88,4 +94,4 @@ const ask = async (): Promise<boolean> => {
   }
 };
 
-run();
+void run();

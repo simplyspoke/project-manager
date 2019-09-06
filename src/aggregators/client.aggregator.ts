@@ -1,22 +1,21 @@
 import chalk from 'chalk';
 import * as fs from 'fs-extra';
 
+import { Store } from './../index';
+import { Project } from './project.aggregator';
+
 export interface Client {
   name: string;
   path: string;
-  projects?: {
-    [projectName: string]: any;
-  };
+  projects: Project[];
 }
 
 export class ClientAggregator {
   options = {};
   projectsPath: string;
-  store: {
-    [key: string]: any;
-  };
+  store: Store;
 
-  constructor(projectsPath: string, store: object) {
+  constructor(projectsPath: string, store: Store) {
     this.projectsPath = projectsPath;
     this.store = store;
   }
@@ -36,6 +35,7 @@ export class ClientAggregator {
           return {
             name: item,
             path: `${this.projectsPath}/${item}`,
+            projects: [],
           };
         }
       );

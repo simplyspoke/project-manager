@@ -3,3 +3,4 @@
  */
 
 export * from './main.generator';
+export * from './vs-code.generator';
