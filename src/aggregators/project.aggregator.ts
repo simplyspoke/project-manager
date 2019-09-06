@@ -7,7 +7,7 @@ import { Store } from './../index';
 export interface Project {
   name: string;
   path: string;
-  repository: any;
+  repository: string;
 }
 
 export class ProjectAggregator {
@@ -42,7 +42,7 @@ export class ProjectAggregator {
 
               if (fs.existsSync(`${client.path}/${item}/.git/config`)) {
                 const gitConfig = ini.parse(fs.readFileSync(gitPath, 'utf-8'));
-                project.repository = gitConfig;
+                project.repository = gitConfig['remote "origin"'].url;
               }
 
               return project;
