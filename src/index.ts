@@ -5,7 +5,11 @@ import * as figlet from 'figlet';
 import * as inquirer from 'inquirer';
 
 import { Client, ClientAggregator, ProjectAggregator } from './aggregators';
-import { MainGenerator, VSCodeGenerator } from './generators';
+import {
+  GitKrackenGenerator,
+  MainGenerator,
+  VSCodeGenerator,
+} from './generators';
 
 export interface Store {
   clients: Client[];
@@ -20,8 +24,9 @@ const aggregators = {
 };
 
 const generators = {
+  gitKracken: new GitKrackenGenerator(store),
   main: new MainGenerator(store),
-  vscode: new VSCodeGenerator(store),
+  vsCode: new VSCodeGenerator(store),
 };
 const init = () => {
   // Clear the screen and reset the cursor
@@ -81,7 +86,8 @@ const ask = async (): Promise<boolean> => {
         await aggregators.client.run();
         await aggregators.project.run();
         await generators.main.run();
-        await generators.vscode.run();
+        await generators.vsCode.run();
+        await generators.gitKracken.run();
         break;
       case 'exit':
         running = false;
