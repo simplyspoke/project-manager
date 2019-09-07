@@ -36,20 +36,20 @@ export class VSCodeGenerator {
     this.store = store;
 
     if (process.env.NODE_ENV === 'development') {
-      this.config.path = './.projects';
+      this.config.path = './.projects/.config';
     }
   }
 
   public async run() {
     const data = this.process(this.store);
 
-    await fs.ensureDir(`${this.config.path}`).catch(err => {
+    await fs.ensureDir(`${this.config.path}`).catch((err) => {
       console.error('Could not creat directory:', err);
     });
 
     await fs
       .writeJson(`${this.config.path}/vscode_projects.json`, data, this.options)
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   }

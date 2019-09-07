@@ -10,12 +10,17 @@ import {
   MainGenerator,
   VSCodeGenerator,
 } from './generators';
+import { RepoSync } from './syncs';
 
 export interface Store {
   clients: Client[];
+  generated: number;
 }
 
-const store: Store = { clients: [] };
+const store: Store = {
+  clients: [],
+  generated: new Date().getTime(),
+};
 const projectsPath = `${process.env.HOME}/projects`;
 
 const aggregators = {
@@ -28,6 +33,11 @@ const generators = {
   main: new MainGenerator(store),
   vsCode: new VSCodeGenerator(store),
 };
+
+const syncs = {
+  repo: new RepoSync(),
+};
+
 const init = () => {
   // Clear the screen and reset the cursor
   process.stdout.write('\x1B[2J\x1B[0f');
@@ -51,6 +61,10 @@ const askQuestions = (): Promise<{ [k: string]: any }> => {
         {
           name: 'Generate Config',
           value: 'generate',
+        },
+        {
+          name: 'Sync',
+          value: 'sync',
         },
         {
           name: 'Exit',
@@ -88,6 +102,11 @@ const ask = async (): Promise<boolean> => {
         await generators.main.run();
         await generators.vsCode.run();
         await generators.gitKracken.run();
+        console.log(chalk.green('Generation Complete!'));
+        break;
+      case 'sync':
+        await syncs.repo.run();
+        console.log(chalk.green('Sync Complete!'));
         break;
       case 'exit':
         running = false;

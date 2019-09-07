@@ -25,7 +25,7 @@ export class ProjectAggregator {
         let pathContents = await fs.readdir(client.path);
 
         client.projects = pathContents
-          .filter(item => {
+          .filter((item) => {
             const stats = fs.lstatSync(`${client.path}/${item}`);
 
             return stats.isDirectory();
@@ -40,7 +40,7 @@ export class ProjectAggregator {
                 repository: 'NONE',
               };
 
-              if (fs.existsSync(`${client.path}/${item}/.git/config`)) {
+              if (fs.existsSync(gitPath)) {
                 const gitConfig = ini.parse(fs.readFileSync(gitPath, 'utf-8'));
                 project.repository = gitConfig['remote "origin"'].url;
               }

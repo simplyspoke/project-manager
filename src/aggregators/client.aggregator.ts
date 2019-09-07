@@ -21,11 +21,10 @@ export class ClientAggregator {
   }
 
   public async run() {
-    console.info(process.env.HOME);
     let pathContents = await fs.readdir(this.projectsPath);
 
     this.store.clients = pathContents
-      .filter(item => {
+      .filter((item) => {
         const stats = fs.lstatSync(`${this.projectsPath}/${item}`);
 
         return stats.isDirectory();
