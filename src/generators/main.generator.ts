@@ -3,7 +3,7 @@ import * as fs from 'fs-extra';
 
 export class MainGenerator {
   config = {
-    path: `${process.env.HOME}/.projects`,
+    path: `${process.env.HOME}/projects/.config`,
   };
   options: fs.WriteOptions = {
     spaces: 2,

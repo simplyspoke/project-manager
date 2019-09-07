@@ -25,7 +25,7 @@ interface VSCodeProjectsFile {
 
 export class VSCodeGenerator {
   config = {
-    path: `${process.env.HOME}/.projects`,
+    path: `${process.env.HOME}/projects/.config`,
   };
   options: fs.WriteOptions = {
     spaces: 2,
