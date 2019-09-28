@@ -24,9 +24,9 @@ export class ClientAggregator {
     let pathContents = await fs.readdir(this.projectsPath);
 
     this.store.clients = pathContents
+      .filter((item) => item !== '.config')
       .filter((item) => {
         const stats = fs.lstatSync(`${this.projectsPath}/${item}`);
-
         return stats.isDirectory();
       })
       .map(

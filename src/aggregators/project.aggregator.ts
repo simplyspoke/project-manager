@@ -26,6 +26,9 @@ export class ProjectAggregator {
 
         client.projects = pathContents
           .filter((item) => {
+            if (item.startsWith('.')) {
+              return false;
+            }
             const stats = fs.lstatSync(`${client.path}/${item}`);
 
             return stats.isDirectory();
